@@ -14,11 +14,12 @@ import java.util.HashMap;
  */
 @Controller
 @RequestMapping("search")
-public class SearchController {
+public class SearchController extends TechJobsController {
 
     @RequestMapping(value = "")
     public String search(Model model) {
-        model.addAttribute("columns", ListController.columnChoices);
+       // model.addAttribute("columns", ListController.columnChoices);
+      model.addAttribute("searchType","all");
         return "search";
     }
 
@@ -32,10 +33,10 @@ public class SearchController {
             jobs = JobData.findByColumnAndValue(searchType,searchTerm);
         }
 
-        model.addAttribute("columns", ListController.columnChoices);
+       // model.addAttribute("columns", ListController.columnChoices);
         model.addAttribute("jobs", jobs );
-       // model.addAttribute("try",jobs.get(0));
-        //model.addAttribute("try2",searchType);
+        model.addAttribute("searchTerm",searchTerm);
+        model.addAttribute("searchType",searchType);
         return "search";
     }
 
